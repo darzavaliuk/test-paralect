@@ -19,27 +19,27 @@ const useStyles = createStyles(() => ({
         margin: 'auto',
         marginTop: "120px",
 
-       
+
     },
 
     description: {
         maxWidth: 200,
         textAlign: "justify",
-    
+
     },
 
     inner: {
         display: "flex",
         justifyContent: "space-between",
 
- 
+
     },
 
     groups: {
         display: "flex",
         flexWrap: "wrap",
 
-   
+
     },
 
     wrapper: {
@@ -59,7 +59,14 @@ const useStyles = createStyles(() => ({
     },
 
     title: {
-        fontWeight: 700,
+        fontFamily: "Inter'",
+        fontWeight: "700",
+        fontSize: "24px",
+        lineHeight: "29px",
+        /* Gray/Gray 900 */
+
+        color: "#343A40",
+        marginBottom: "32px"
     },
 
     afterFooter: {
@@ -73,6 +80,29 @@ const useStyles = createStyles(() => ({
         flexDirection: "column",
         alignItems: "center",
     },
+
+    button: {
+        padding: "10px 24px",
+        // gap: "10px",
+
+        width: "164px",
+        height: "42px",
+
+        /* Blue 100 */
+
+        background: "#DEECFF",
+        borderRadius: "8px",
+        fontFamily: "Open Sans",
+fontWeight: "600",
+fontSize: "14px",
+lineHeight: "155%",
+/* identical to box height, or 22px */
+
+
+/* Blue 600 */
+
+color: "#3B7CD3",
+}
 }));
 
 const NoContent = () => {
@@ -80,11 +110,12 @@ const NoContent = () => {
     const router = useRouter();
     return (
         <Container>
-            <Image src={"../Frame.svg"} className={classes.logo} />
-            <Title style={{ textAlign: "center" }}>Упс, здесь еще ничего нет!</Title> <Group position="center">
+            <Image src={"../Frame.svg"} className={classes.logo} mb={32} />
+            <Title style={{ textAlign: "center" }} mb={32} className={classes.title}>Упс, здесь еще ничего нет!</Title> <Group position="center">
                 <Button
-
+                    mt={32}
                     size="md"
+                    className={classes.button}
                     onClick={() => {
                         router.push("/");
                     }}
