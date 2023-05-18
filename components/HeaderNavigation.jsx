@@ -123,7 +123,7 @@ export default function HeaderNavigation() {
   ));
 
   return (
-    <Header height={{ base: 50, md: 84 }} p="md" className={classes.header}>
+    <Header height={ 84 } p="md" className={classes.header}>
       <Logo />
       <DrawerMenu opened={opened} setOpened={toggle} mainLinks={mainLinks} />
       <Container className={classes.inner}>
