@@ -26,7 +26,7 @@ function Contacts() {
         setIsLoading(true);
         const headers = {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer v3.r.137440105.50dc4d55a09502fea22e76765ac5d3a3e2d1149f.2047bea389aa50ea5d5d2129534db084575a47c8',
+          'Authorization': 'Bearer v3.r.137440105.a077cda7bfea7618cc08cc357d86d8d77d1c5f2e.c094dc2135eaa978b177f9543a72a5ac0cbfcb57',
           'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
           'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
         };
