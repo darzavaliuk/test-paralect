@@ -165,7 +165,7 @@ export default function JobSearch() {
       breakpoints={[{ maxWidth: "md", cols: 1 },]}
       className={classes.gridSimple}
     >
-      <Container className={classes.help}>
+      <Container className={classes.help} mb={15}>
         <FilterPanel parameter={parameter} onParameterChange={handleParameterChange} ></FilterPanel>
       </Container >
       <div className={classes.vacanciesList}  >
