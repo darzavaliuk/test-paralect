@@ -37,9 +37,10 @@ function RequestComponent({ parameter }) {
             'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
         };
         let req
-        if (parameter)
+        if (parameter) {
+            handlePageChange(0)
             req = "https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&" + `page=${currentPage.selected}&` + "keyword=" + ((change) ? (change) : ("")) + "&catalogues=" + ((parameter.category !== -1) ? (parameter.category) : ("")) + "&payment_from=" + ((parameter.valueFrom) ? (parameter.valueFrom) : ("")) + "&payment_to=" + ((parameter.valueTo) ? (parameter.valueTo) : ("")) + "/";
-        else
+         } else
             req = "https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&" + `page=${currentPage.selected}&` + "keyword=" + ((change) ? (change) : (""));
         // console.log((change) ? (change) : ("") + "&catalogues="+ (parameter.category) ? (parameter.category) : ("") + "&payment_from=" +  (parameter.valueFrom) ? (parameter.valueFrom) : ("") +"&payment_to=" +  (parameter.valueTo) ? (parameter.valueTo) : ("") + "/")
         console.log(req)

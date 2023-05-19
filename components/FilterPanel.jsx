@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Select, Button, createStyles, Title, Text, CloseButton, Input, NumberInput } from '@mantine/core';
-import { IconChevronDown } from '@tabler/icons-react';
+import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -158,9 +158,9 @@ function FilterPanel({ onParameterChange }) {
     const buttonRef = React.useRef(null);
 
     React.useEffect(() => {
-      if (buttonRef.current) {
-        buttonRef.current.setAttribute('data-elem', 'search-button');
-      }
+        if (buttonRef.current) {
+            buttonRef.current.setAttribute('data-elem', 'search-button');
+        }
     }, []);
 
     function handleClick() {
@@ -219,18 +219,24 @@ function FilterPanel({ onParameterChange }) {
     const numberInputRef = React.useRef(null);
 
     React.useEffect(() => {
-      if (numberInputRef.current) {
-        numberInputRef.current.setAttribute('data-elem', 'salary-from-input');
-      }
+        if (numberInputRef.current) {
+            numberInputRef.current.setAttribute('data-elem', 'salary-from-input');
+        }
     }, []);
 
     const numberInputRef2 = React.useRef(null);
 
     React.useEffect(() => {
-      if (numberInputRef2.current) {
-        numberInputRef2.current.setAttribute('data-elem', 'salary-to-input');
-      }
+        if (numberInputRef2.current) {
+            numberInputRef2.current.setAttribute('data-elem', 'salary-to-input');
+        }
     }, []);
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    function handleToggle() {
+        setIsOpen(!isOpen);
+    }
 
     return (
         <div className={classes.wrapper}>
@@ -260,39 +266,40 @@ function FilterPanel({ onParameterChange }) {
                 <Select
                     id="industry-select"
                     mb={20}
+                    // pr={0}
                     placeholder="Выберите отрасль"
-                    rightSection={<IconChevronDown size="1rem" />}
+                    rightSection={<div style={{paddingRight: "17px",     paddingTop: "5px",}}>
+                        {isOpen ? <IconChevronUp color='blue' /> : <IconChevronDown color='#ACADB9' />}
+                    </div>}
+                    onClick={handleToggle}
                     rightSectionWidth={30}
+                    opened={isOpen}
                     value={category}
                     onChange={(category) => {
                         setCategory(category)
+                        setIsOpen(false)
                     }}
                     data={data && Array.isArray(data) ? data.map(el => ({
                         value: el["key"],
                         label: el["title"]
                     }), { value: -1, label: "Выберете отрасль" }) : []}
                     ref={selectRef}
+
                     inputref={(node) => initialValue.current = node.value}
                     styles={(theme) => ({
                         description: {
                             width: "267px",
-                            // maxWidth: '200px', overflowX: 'scroll', wordBreak: 'break-word' ,
-                            // overflowX: "anywhere",
-                            // overflowX: 'scroll',
-                            // maxHeight: "50px",
                             wordWrap: "break-word",
                             overflowWrap: "anywhere",
 
                         },
+                        input: {
+                        
+                            paddingRight: "28px",
+                            overflowX: "hidden"
+                        },
                         item: {
                             overflowWrap: 'break-word',
-                            // maxWidth: '200px', wordBreak: 'break-word' ,
-                            // width: "267px",
-                            // overflowX: "anywhere",
-                            // overflowX: 'scroll',
-                            // maxHeight: "50px",
-                            // wordWrap: "break-word",
-                            // wordBreak: "break-word",
                             '&[data-selected]': {
                                 '&, &:hover': {
                                     backgroundColor: 'rgba(59, 124, 211, 1)',
@@ -308,7 +315,7 @@ function FilterPanel({ onParameterChange }) {
 
                 <Text weight={500} size="lg" mb={5}>Оклад</Text>
                 <NumberInput
-                   id="salary-from-input"
+                    id="salary-from-input"
                     style={{ minWidth: "275px", width: "100%" }}
                     // inputref={(node) => initialValue.current = node.value}
                     value={valueFrom}

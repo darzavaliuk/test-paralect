@@ -58,8 +58,11 @@ function SearchPanel({ onSearch }) {
                     fontFamily: "Inter",
                     fontWeight: 500,
                     fontSize: "14px",
-                    lineHeight: "21px"
-
+                    lineHeight: "21px",
+                    '&:hover': {
+                        background: '#4c8300',
+                        // color: '#fff',
+                      },
                 }}
             >Поиск</Button>
         </div>
