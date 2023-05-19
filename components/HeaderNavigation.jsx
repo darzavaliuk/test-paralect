@@ -10,7 +10,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import DrawerMenu from "../components/DrawerMenu.js";
+import DrawerMenu from "./DrawerMenu.jsx";
 import Logo from "./Logo";
 
 const mainLinks = [
@@ -106,7 +106,6 @@ export default function HeaderNavigation() {
 
   useEffect(() => {
     const currentPath = router.pathname;
-    console.log(router.pathname)
     setActive(currentPath.includes("/vacancies") ? "/vacancies" : currentPath);
   }, [router.pathname, setActive]);
 

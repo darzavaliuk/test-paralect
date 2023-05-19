@@ -6,6 +6,9 @@ import {
 } from "@mantine/core";
 import { useRouter } from 'next/router';
 import Star from './Star';
+import locationSVG from '../public/location.svg'
+import pointSVG from '../public/point.svg';
+import Image from "next/image";
 
 const useStyles = createStyles((theme) => ({
     title: {
@@ -44,6 +47,12 @@ const useStyles = createStyles((theme) => ({
         lineHeight: "24px",
 
         color: "#5E96FC",
+
+        "&:hover": {
+            textDecoration: "underline",
+            cursor: "pointer",
+        },
+
         "&::after": {
             content: '""',
             display: "block",
@@ -79,8 +88,10 @@ const nullFunction = () => { };
 
 const CardVacancy = ({ feature, onStarClick = nullFunction, isStarred }) => {
 
-    const handleClick = (feature) => {
-        router.push("/vacancies/" + feature.id);
+    const router = useRouter();
+
+    const handleClick = async (feature) => {
+        await router.push("/vacancies/" + feature.id);
     };
 
     const [filled, setFilled] = useState(false);
@@ -91,8 +102,7 @@ const CardVacancy = ({ feature, onStarClick = nullFunction, isStarred }) => {
         setFilled(!!isFilled);
     }, [feature.id]);
 
-    const { classes, theme } = useStyles();
-    const router = useRouter();
+    const { classes } = useStyles();
     return (
         <Card
             key={feature["profession"]}
@@ -110,31 +120,36 @@ const CardVacancy = ({ feature, onStarClick = nullFunction, isStarred }) => {
                 </Text>
                 <Star id={feature.id} onStarClick={onStarClick} isStarred={isStarred} />
             </div>
-            <div style={{ display: "flex", marginTop: "12.5px" }}>
-                {(feature["payment_from"] != 0 || feature["payment_to"] != 0) ?
+            <div style={{ display: "flex", alignItems: "center", marginTop: "12.5px" }}>
+                {(feature["payment_from"] !== 0 || feature["payment_to"] !== 0) ?
                     (<><Text className={classes.money} >
-                        {(feature["payment_from"] != 0 && feature["payment_to"] != 0) ? (<div style={{ display: "flex" }}><Text className={classes.money} style={{ marginRight: "4px" }}>з/п {feature["payment_from"]}</Text><Text className={classes.money} >-  {feature["payment_to"]}</Text></div>) : (<></>)}
+                        {(feature["payment_from"] !== 0 && feature["payment_to"] !== 0) ? (<div style={{ display: "flex" }}><Text className={classes.money} style={{ marginRight: "4px" }}>з/п {feature["payment_from"]}</Text><Text className={classes.money} >-  {feature["payment_to"]}</Text></div>) : (<></>)}
                     </Text>
 
-                        {(feature["payment_from"] != 0 && feature["payment_to"] == 0) ? (<div><Text className={classes.money} >з/п от {feature["payment_from"]}</Text></div>) : (<></>)}
-                        {(feature["payment_from"] == 0 && feature["payment_to"] != 0) ? (<div><Text className={classes.money} style={{ marginRight: "4px" }}>з/п {feature["payment_to"]}</Text></div>) : (<></>)}
+                        {(feature["payment_from"] !== 0 && feature["payment_to"] === 0) ? (<div><Text className={classes.money} >з/п от {feature["payment_from"]}</Text></div>) : (<></>)}
+                        {(feature["payment_from"] === 0 && feature["payment_to"] !== 0) ? (<div><Text className={classes.money} style={{ marginRight: "4px" }}>з/п {feature["payment_to"]}</Text></div>) : (<></>)}
 
                         <Text className={classes.money} style={{ marginLeft: "2px" }}>
                             {feature["currency"]}
-                        </Text><Text style={{ marginRight: "12px", marginLeft: "12px" }}>•</Text></>) : (<></>)}
+                        </Text>
+                        <Image
+                            src={pointSVG}
+                            alt={'dot'}
+                            style={{ marginRight: "12px", marginLeft: "12px" }}/></>) : (<></>)}
                 <Text className={classes.workingHours} >
                     {feature["type_of_work"]["title"]}
                 </Text>
             </div>
 
             <div style={{ display: "flex", marginTop: "13px" }}>
-                <img src={"../location.svg"} />
+                <Image
+                    src={locationSVG}
+                    alt={"location"}
+                />
                 <Text style={{ marginLeft: "11px" }} className={classes.money} >
                     {feature["town"]["title"]}
                 </Text>
             </div>
-
-
         </Card>
     )
 }

@@ -17,8 +17,6 @@ const useStyles = createStyles((theme) => ({
 
     description: {
         maxWidth: 770,
-
-
         "&::after": {
             content: '""',
             display: "block",

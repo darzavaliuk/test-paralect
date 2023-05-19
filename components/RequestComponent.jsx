@@ -9,82 +9,7 @@ import ReactPaginate from 'react-paginate';
 import SearchPanel from './SearchPanel';
 import CardVacancy from './CardVacancy';
 import Loader from './Loader';
-
-const useStyles = createStyles((theme) => ({
-    title: {
-        fontSize: 34,
-        fontWeight: 900,
-        [theme.fn.smallerThan("sm")]: {
-            fontSize: 24,
-        },
-    },
-
-    description: {
-        maxWidth: 770,
-
-
-        "&::after": {
-            content: '""',
-            display: "block",
-            backgroundColor: theme.fn.primaryColor(),
-            width: 45,
-            height: 2,
-            marginTop: theme.spacing.sm,
-            marginLeft: "auto",
-            marginRight: "auto",
-        },
-    },
-
-    card: {
-        border: `1px solid ${theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]
-            }`,
-    },
-
-    cardTitle: {
-        fontFamily: "Inter",
-        fontWeight: 600,
-        fontSize: "20px",
-        lineHeight: "24px",
-
-        /* Blue Main 500 */
-
-        color: "#5E96FC",
-        "&::after": {
-            content: '""',
-            display: "block",
-        },
-    },
-
-    money: {
-        fontFamily: "Inter",
-        fontWeight: 600,
-        fontSize: "16px",
-        lineHeight: "20px",
-        /* identical to box height, or 125% */
-        /* Black */
-        color: "#232134"
-    },
-
-    workingHours: {
-        fontFamily: "Inter",
-        fontWeight: 400,
-        fontSize: "16px",
-        lineHeight: "20px",
-        /* identical to box height, or 125% */
-        /* Black */
-        color: "#232134"
-    },
-
-    help: {
-        padding: 0,
-    },
-    logo: {
-        maxWidth: 60,
-
-
-    },
-}));
-
+import NoContent from "./NoContent";
 
 
 function RequestComponent({ parameter }) {
@@ -113,53 +38,51 @@ function RequestComponent({ parameter }) {
         };
         let req
         if (parameter)
-            req = "https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&" + `page=${currentPage.selected}&` + "keyword=" + ((change) ? (change) : ("")) + "&catalogues=" + ((parameter.category != -1) ? (parameter.category) : ("")) + "&payment_from=" + ((parameter.valueFrom) ? (parameter.valueFrom) : ("")) + "&payment_to=" + ((parameter.valueTo) ? (parameter.valueTo) : ("")) + "/";
+            req = "https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&" + `page=${currentPage.selected}&` + "keyword=" + ((change) ? (change) : ("")) + "&catalogues=" + ((parameter.category !== -1) ? (parameter.category) : ("")) + "&payment_from=" + ((parameter.valueFrom) ? (parameter.valueFrom) : ("")) + "&payment_to=" + ((parameter.valueTo) ? (parameter.valueTo) : ("")) + "/";
         else
             req = "https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&" + `page=${currentPage.selected}&` + "keyword=" + ((change) ? (change) : (""));
         // console.log((change) ? (change) : ("") + "&catalogues="+ (parameter.category) ? (parameter.category) : ("") + "&payment_from=" +  (parameter.valueFrom) ? (parameter.valueFrom) : ("") +"&payment_to=" +  (parameter.valueTo) ? (parameter.valueTo) : ("") + "/")
         console.log(req)
 
-        fetch(req, { headers })
+        fetch(req, { headers, })
             .then((response) => response.json())
-            .then((data) => { setData(data); setTotalPages(Math.ceil(data["total"] / 4)); data["objects"].map(el => console.log(el["profession"])); setIsLoading(false); })
+            .then((data) => { setData(data); setTotalPages(Math.ceil(data["total"] / 4)); data["objects"].map(el => console.log(el["profession"])); console.log(data.total); setIsLoading(false);  })
             .catch((error) => console.error(error));
 
     }, [change, parameter, currentPage.selected]);
-    const { classes } = useStyles();
 
 
     return (
-        <Container size="lg" padding={0} className={classes.help} >
+        <Container size="lg" padding={0} >
             <SearchPanel onSearch={handleSearch} />
-            {(data && !isLoading) ? (
+            {(data && !isLoading && data.total) ? (
                 <div>
-                    {data ? (
-                        <SimpleGrid
-                            mt={16}
-                            cols={1}
-                            breakpoints={[{ maxWidth: "md", cols: 1 }]}
 
-                        >
-                            {data["objects"].map((feature) => (
-                                <CardVacancy feature={feature} />
-                            ))}
+                    <SimpleGrid
+                        mt={16}
+                        cols={1}
+                        breakpoints={[{ maxWidth: "md", cols: 1 }]}
 
-                        </SimpleGrid>
-                    ) : (
-                        <p style={{ color: '#000000' }}>Loading...</p>
-                    )}
+                    >
+                        {data["objects"].map((feature, key) => (
+                            <CardVacancy key={key} feature={feature} />
+                        ))}
+
+                    </SimpleGrid>
+
                 </div>
-            ) : (
-                <div>
-                    {isLoading && <Loader isLoading={isLoading} />}
-                </div>
-            )}
+            ) : 
+
+                (isLoading) ? (<Loader isLoading={isLoading}/>)  : (<NoContent /> ) 
+
+
+            }
             <ReactPaginate
                 pageCount={(isLoading) ? 0 : totalPages}
                 pageRangeDisplayed={(currentPage.selected == 1) ? 2 : 3}
                 marginPagesDisplayed={0}
                 onPageChange={handlePageChange}
-                containerClassName={(isLoading || !data) ? "hidden" : "pagination"}
+                containerClassName={(isLoading || !data || !data.total) ? "hidden" : "pagination"}
                 activeClassName={"active"}
                 previousLabel={"<"}
                 nextLabel={">"}

@@ -53,7 +53,7 @@ function Contacts() {
       setData(null)
       setIsLoading(false);
     }
-  }, [currentPage.selected, isStarred]);
+  }, [currentPage.selected]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -75,7 +75,7 @@ function Contacts() {
             <CardVacancy feature={feature} onStarClick={handleStarClick} isStarred={isStarred} />
           ))}
         </SimpleGrid>
-      </>) : (isLoading) ? (<Loader isLoading={isLoading} />) : (<NoContent />)}
+      </>) : (isLoading ) ? (<Loader isLoading={isLoading} />) : (<NoContent />)}
       <ReactPaginate
         pageCount={(isLoading) ? 0 : totalPages}
         pageRangeDisplayed={(currentPage.selected == 1) ? 2 : 3}

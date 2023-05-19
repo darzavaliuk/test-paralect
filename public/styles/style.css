@@ -44,10 +44,25 @@
     align-items: center;
 }
 
+.pagination li:hover {
+    cursor: pointer;
+}
+
+.my-menu {
+    overflow-x: hidden;
+    flex-wrap: wrap;
+}
+
+.my-menu-item {
+    max-width: 267px;
+    overflow-x: hidden;
+    flex-wrap: wrap;
+}
+
 .pagination li {
     display: inline-block;
     margin: 0 5px;
-    padding: 4px 10px;
+    /* padding: 4px 10px; */
     border: 1px solid #0074d9;
     color: #0074d9;
     color: #ffffff;
@@ -94,6 +109,13 @@
     border-radius: 4px;
     width: 32px;
     height: 32px;
+    /* padding: 10px; */
+
+    /* color: #FFFFFF; */
+}
+
+.pagination li a {
+    padding: 12px;
 
     /* color: #FFFFFF; */
 }
@@ -114,12 +136,6 @@
     opacity: 0.5;
     pointer-events: none;
 
-}
-
-.pagination .disabled {
-    opacity: 0.5;
-    pointer-events: none;
-    cursor: default;
 }
 
 .pagination .previous.disabled,
@@ -195,4 +211,9 @@
 svg:hover path {
     stroke: #5E96FC;
     stroke-width: 1.5px;
+    cursor: pointer;
+}
+
+svg:hover  {
+    cursor: pointer;
 }
