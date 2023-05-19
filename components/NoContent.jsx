@@ -102,6 +102,14 @@ lineHeight: "155%",
 /* Blue 600 */
 
 color: "#3B7CD3",
+"&:hover": {
+    background: "#92C1FF",
+    cursor: "pointer",
+},
+"&:active": {
+    background: "#3B7CD3",
+    cursor: "pointer",
+}
 }
 }));
 

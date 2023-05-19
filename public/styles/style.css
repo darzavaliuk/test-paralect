@@ -125,6 +125,30 @@
     /* color: #FFFFFF; */
 }
 
+.btn {
+    top: 9px;
+    position: absolute;
+    right: 12px;
+    height: 32px;
+    width: 83px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background: #5E96FC;
+    border-radius: 8px;
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.btn:hover {
+    background: #92C1FF;
+}
+
+.btn:active {
+    background: #3B7CD3;
+}
+
 .pagination .previous.disabled {
     opacity: 0.5;
     pointer-events: none;

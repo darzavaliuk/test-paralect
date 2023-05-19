@@ -118,7 +118,15 @@ const useStyles = createStyles((theme) => ({
         color: "#FFF",
         fontFamily: "Inter",
         fontWeight: 500,
-        fontSize: "14px"
+        fontSize: "14px",
+        "&:hover": {
+            background: "#92C1FF",
+            cursor: "pointer",
+        },
+        "&:active": {
+            background: "#3B7CD3",
+            cursor: "pointer",
+        }
     },
 
     vacanciesList: {
