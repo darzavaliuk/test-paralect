@@ -32,7 +32,7 @@ function Contacts() {
         };
         let str = ""
         ids.map(id => { str += "&ids[]=" + id })
-        let req = "https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&" + `page=${currentPage.selected}` + str;
+        let req = "https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?published=1&count=4&" + `page=${currentPage.selected}` + str;
 
         fetch(req, {
           headers
@@ -75,7 +75,7 @@ function Contacts() {
             <CardVacancy feature={feature} onStarClick={handleStarClick} isStarred={isStarred} />
           ))}
         </SimpleGrid>
-      </>) : (isLoading ) ? (<Loader isLoading={isLoading} />) : (<NoContent />)}
+      </>) : (isLoading) ? (<Loader isLoading={isLoading} />) : (<NoContent />)}
       <ReactPaginate
         pageCount={(isLoading) ? 0 : totalPages}
         pageRangeDisplayed={(currentPage.selected == 1) ? 2 : 3}
@@ -85,6 +85,7 @@ function Contacts() {
         activeClassName={"active"}
         previousLabel={"<"}
         nextLabel={">"}
+        forcePage={currentPage}
         disableLastPage={true}
         onPageActive={page => currentPage = page.selected}
         disabledClassName={"disabled"}

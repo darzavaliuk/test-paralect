@@ -38,10 +38,10 @@ function RequestComponent({ parameter }) {
         };
         let req
         if (parameter) {
-            handlePageChange(0)
-            req = "https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&" + `page=${currentPage.selected}&` + "keyword=" + ((change) ? (change) : ("")) + "&catalogues=" + ((parameter.category !== -1) ? (parameter.category) : ("")) + "&payment_from=" + ((parameter.valueFrom) ? (parameter.valueFrom) : ("")) + "&payment_to=" + ((parameter.valueTo) ? (parameter.valueTo) : ("")) + "/";
+            // handlePageChange(0)
+            req = "https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?published=1&count=4&" + `page=${currentPage.selected}&` + "keyword=" + ((change) ? (change) : ("")) + "&catalogues=" + ((parameter.category !== -1) ? (parameter.category) : ("")) + "&payment_from=" + ((parameter.valueFrom) ? (parameter.valueFrom) : ("")) + "&payment_to=" + ((parameter.valueTo) ? (parameter.valueTo) : ("")) + "/";
          } else
-            req = "https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&" + `page=${currentPage.selected}&` + "keyword=" + ((change) ? (change) : (""));
+            req = "https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?published=1&count=4&" + `page=${currentPage.selected}&` + "keyword=" + ((change) ? (change) : (""));
         // console.log((change) ? (change) : ("") + "&catalogues="+ (parameter.category) ? (parameter.category) : ("") + "&payment_from=" +  (parameter.valueFrom) ? (parameter.valueFrom) : ("") +"&payment_to=" +  (parameter.valueTo) ? (parameter.valueTo) : ("") + "/")
         console.log(req)
 
@@ -87,6 +87,7 @@ function RequestComponent({ parameter }) {
                 activeClassName={"active"}
                 previousLabel={"<"}
                 nextLabel={">"}
+                // forcePage={currentPage.selected}
                 disableLastPage={true}
                 onPageActive={page => currentPage = page.selected}
                 disabledClassName={"disabled"}
