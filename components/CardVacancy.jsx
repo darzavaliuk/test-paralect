@@ -105,6 +105,7 @@ const CardVacancy = ({ feature, onStarClick = nullFunction, isStarred }) => {
     const { classes } = useStyles();
     return (
         <Card
+        data-elem={`vacancy-${feature["id"]}`}
             key={feature["profession"]}
             className={classes.card}
             p="24px"

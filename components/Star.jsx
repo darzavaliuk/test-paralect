@@ -28,6 +28,7 @@ function Star(props) {
         <div
             className="star"
             onClick={handleClick}
+            data-elem={`vacancy-${props.id}-shortlist-button`}
         >
             <StarIcon filled={filled} />
         </div>
