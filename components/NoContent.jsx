@@ -7,8 +7,10 @@ import {
     Button,
     Title
 } from "@mantine/core";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
+// import { url } from 'inspector';
 // import NotFoundImg from "../../public/Frame.svg"
+import drawerImage from "../public/frame.svg";
 
 const NOT_FOUND_LABEL = 'Упс, здесь еще ничего нет!';
 const SEARCH_VACANCIES = 'Поиск Вакансий';
@@ -22,7 +24,7 @@ const useStyles = createStyles(() => ({
         maxWidth: 240,
         margin: 'auto',
         marginTop: "120px",
-
+        backgroundImage: `url(${drawerImage})`
 
     },
 
@@ -118,12 +120,13 @@ const useStyles = createStyles(() => ({
 }));
 
 const NoContent = () => {
-    const {classes} = useStyles();
+    const { classes } = useStyles();
     const router = useRouter();
     return (
         <Container>
-            <Image src={"../frame.svg"} className={classes.logo} mb={32}/>
-            <Title style={{textAlign: "center"}} mb={32} className={classes.title}>
+           <img src={"./frame.svg"} alt={"logo"} />
+            <Image className={classes.logo} mb={32} />
+            <Title style={{ textAlign: "center" }} mb={32} className={classes.title}>
                 {NOT_FOUND_LABEL}
             </Title>
             <Group position="center">
