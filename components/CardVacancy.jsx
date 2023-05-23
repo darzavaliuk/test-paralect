@@ -6,7 +6,7 @@ import {
 } from "@mantine/core";
 import {useRouter} from 'next/router';
 import Star from './Star';
-import locationSVG from '../public/location.svg'
+import locationSVG from '../public/frame_1.svg'
 import pointSVG from '../public/point.svg';
 import Image from "next/image";
 
