@@ -122,7 +122,7 @@ const NoContent = () => {
     const router = useRouter();
     return (
         <Container>
-            <Image src={NotFoundImg} className={classes.logo} mb={32}/>
+            <Image src={NotFoundImg}  alt={"not found"} className={classes.logo} mb={32}/>
             <Title style={{textAlign: "center"}} mb={32} className={classes.title}>
                 {NOT_FOUND_LABEL}
             </Title>
