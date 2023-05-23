@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "components/Contacts.jsx", "components/Layout.jsx", "components/FeaturesCards.jsx", "pages/index.jsx", "pages/saved.jsx", "pages/favourite.jsx", "pages/404.jsx"  ],
+, "components/Favourites.jsx", "components/Layout.jsx", "components/FeaturesCards.jsx", "pages/index.jsx", "pages/saved.jsx", "pages/favourite.jsx", "pages/404.jsx"  ],
   "exclude": [
     "node_modules"
   ]

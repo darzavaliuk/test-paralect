@@ -1,12 +1,12 @@
 import {Container} from "@mantine/core";
-import Contacts from "../components/Contacts.jsx";
+import Favourites from "../components/Favourites.jsx";
 
-function Contact() {
+function Favourite() {
     return (
         <Container size={"md"}>
-            <Contacts/>
+            <Favourites/>
         </Container>
     );
 }
 
-export default Contact;
+export default Favourite;

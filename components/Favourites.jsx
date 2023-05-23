@@ -8,7 +8,7 @@ import Loader from './Loader';
 const ARROW_LEFT = '<';
 const ARROW_RIGHT = '>';
 
-function Contacts() {
+function Favourites() {
     let [currentPage, setCurrentPage] = useState(0);
     let [totalPages, setTotalPages] = useState(0)
     const [data, setData] = useState(null);
@@ -104,4 +104,4 @@ function Contacts() {
 
 }
 
-export default Contacts
+export default Favourites
