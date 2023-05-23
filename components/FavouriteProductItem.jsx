@@ -104,7 +104,7 @@ function FavoriteProductItem({data}) {
         console.log(favoriteProducts)
         let update;
         if (favoriteProducts) {
-            console.log("kdsjf")
+            // console.log("kdsjf")
             update = favoriteProducts.filter(p => p.id !== feature.id);
         } else {
             update = []

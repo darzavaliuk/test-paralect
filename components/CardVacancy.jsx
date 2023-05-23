@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     createStyles,
     Text,
     Card,
 } from "@mantine/core";
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import Star from './Star';
 import locationSVG from '../public/location.svg'
 import pointSVG from '../public/point.svg';
@@ -42,7 +42,7 @@ const useStyles = createStyles((theme) => ({
 
     card: {
         border: `1px solid ${theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]
-        }`,
+            }`,
     },
 
     cardTitle: {
@@ -92,7 +92,7 @@ const useStyles = createStyles((theme) => ({
 const nullFunction = () => {
 };
 
-const CardVacancy = ({feature, onStarClick = nullFunction, isStarred}) => {
+const CardVacancy = ({ feature, onStarClick = nullFunction, isStarred }) => {
 
     const router = useRouter();
 
@@ -108,7 +108,7 @@ const CardVacancy = ({feature, onStarClick = nullFunction, isStarred}) => {
         setFilled(!!isFilled);
     }, [feature.id]);
 
-    const {classes} = useStyles();
+    const { classes } = useStyles();
     return (
         <Card
             data-elem={`vacancy-${feature["id"]}`}
@@ -121,19 +121,21 @@ const CardVacancy = ({feature, onStarClick = nullFunction, isStarred}) => {
             }}
         >
 
-            <div style={{display: "flex", justifyContent: "space-between"}}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Text className={classes.cardTitle} onClick={() => handleClick(feature)}>
                     {feature["profession"]}
                 </Text>
-                <Star id={feature.id} onStarClick={onStarClick} isStarred={isStarred}/>
+                <Star id={feature.id} onStarClick={onStarClick} isStarred={isStarred} />
             </div>
-            <div style={{display: "flex", alignItems: "center", marginTop: "12.5px"}}>
+            <div style={{ display: "flex", alignItems: "center", marginTop: "12.5px" }}>
                 {(feature["payment_from"] !== 0 || feature["payment_to"] !== 0) ?
                     (<><Text className={classes.money}>
                         {(feature["payment_from"] !== 0 && feature["payment_to"] !== 0) ? (
-                            <div style={{display: "flex"}}><Text className={classes.money}
-                                                                 style={{marginRight: "4px"}}>{SALARY} {feature["payment_from"]}</Text><Text
-                                className={classes.money}>{MINUS} {feature["payment_to"]}</Text></div>) : (<></>)}
+                            <div style={{ display: "flex", textAlign:  "center" }}><Text className={classes.money}
+                                style={{ marginRight: "4px" }}>{SALARY}</Text><Text className={classes.money}
+                                    style={{ marginRight: "4px" }}>{feature["payment_from"]}</Text><Text className={classes.money}
+                                        style={{ marginRight: "4px" }}>{MINUS}</Text><Text
+                                            className={classes.money}>{feature["payment_to"]}</Text></div>) : (<></>)}
                     </Text>
 
                         {(feature["payment_from"] !== 0 && feature["payment_to"] === 0) ? (
@@ -141,27 +143,27 @@ const CardVacancy = ({feature, onStarClick = nullFunction, isStarred}) => {
                             </div>) : (<></>)}
                         {(feature["payment_from"] === 0 && feature["payment_to"] !== 0) ? (
                             <div><Text className={classes.money}
-                                       style={{marginRight: "4px"}}>{SALARY} {feature["payment_to"]}</Text>
+                                style={{ marginRight: "4px" }}>{SALARY} {feature["payment_to"]}</Text>
                             </div>) : (<></>)}
 
-                        <Text className={classes.money} style={{marginLeft: "2px"}}>
+                        <Text className={classes.money} style={{ marginLeft: "2px" }}>
                             {feature["currency"]}
                         </Text>
                         <Image
                             src={pointSVG}
                             alt={'dot'}
-                            style={{marginRight: "12px", marginLeft: "12px"}}/></>) : (<></>)}
+                            style={{ marginRight: "12px", marginLeft: "12px" }} /></>) : (<></>)}
                 <Text className={classes.workingHours}>
                     {feature["type_of_work"]["title"]}
                 </Text>
             </div>
 
-            <div style={{display: "flex", marginTop: "13px"}}>
+            <div style={{ display: "flex", marginTop: "13px" }}>
                 <Image
                     src={locationSVG}
                     alt={"location"}
                 />
-                <Text style={{marginLeft: "11px"}} className={classes.money}>
+                <Text style={{ marginLeft: "11px" }} className={classes.money}>
                     {feature["town"]["title"]}
                 </Text>
             </div>
