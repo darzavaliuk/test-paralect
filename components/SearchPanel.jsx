@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {Input, Button} from '@mantine/core';
-import {IconSearch} from '@tabler/icons-react';
+import React, { useState } from 'react';
+import { Input, Button } from '@mantine/core';
+import { IconSearch } from '@tabler/icons-react';
 
 const SEARCH = 'Поиск';
 const ENTER_VACANCY_PLACEHOLDER = 'Введите название вакансии';
 
-function SearchPanel({onSearch}) {
+function SearchPanel({ onSearch }) {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSearchTermChange = (event) => {
@@ -32,17 +32,28 @@ function SearchPanel({onSearch}) {
         }
     }, []);
 
+
+    const styles = {
+        input: {
+            fontFamily: 'Inter',
+            display: "block",
+            fontWeight: 400,
+            fontSize: '14px',
+            height: '48px',
+            ":hover": {
+                borderColor: "#5E96FC"
+            }
+        },
+    };
+
     return (
-        <div style={{position: 'relative', height: "48px"}}>
+        <div style={{ position: 'relative', height: "48px", }}>
             <Input placeholder={ENTER_VACANCY_PLACEHOLDER} value={searchTerm}
-                   onChange={handleSearchTermChange}
-                   ref={inputRef}
-                   icon={<IconSearch/>} size="lg" style={{
-                fontFamily: "Inter",
-                fontWeight: 400,
-                fontSize: "14px",
-                lineHeight: "21px",
-            }}/>
+                onChange={handleSearchTermChange}
+                ref={inputRef}
+                className='inputStyle'
+                styles={styles}
+                icon={<IconSearch height={15}/>} />
             <Button
                 onClick={handleSearch}
                 ref={buttonRef}

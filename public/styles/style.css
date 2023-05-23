@@ -38,6 +38,15 @@
     display: none;
 }
 
+.inputStyle {
+    height: "48px"
+}
+
+.inputStyle:hover {
+   border-color: "#5E96FC";
+}
+
+
 .pagination {
     display: flex;
     justify-content: center;
