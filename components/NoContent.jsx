@@ -8,6 +8,7 @@ import {
     Title
 } from "@mantine/core";
 import {useRouter} from "next/router";
+import NotFoundImg from "../../public/Frame.svg"
 
 const NOT_FOUND_LABEL = 'Упс, здесь еще ничего нет!';
 const SEARCH_VACANCIES = 'Поиск Вакансий';
@@ -121,7 +122,7 @@ const NoContent = () => {
     const router = useRouter();
     return (
         <Container>
-            <Image src={"../Frame.svg"} className={classes.logo} mb={32}/>
+            <Image src={NotFoundImg} className={classes.logo} mb={32}/>
             <Title style={{textAlign: "center"}} mb={32} className={classes.title}>
                 {NOT_FOUND_LABEL}
             </Title>
