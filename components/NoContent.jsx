@@ -24,7 +24,7 @@ const useStyles = createStyles(() => ({
         maxWidth: 240,
         margin: 'auto',
         marginTop: "120px",
-        backgroundImage: `url(${drawerImage})`
+        marginBottom: "32px"
 
     },
 
@@ -124,8 +124,9 @@ const NoContent = () => {
     const router = useRouter();
     return (
         <Container>
-           <img src={"./frame.svg"} alt={"logo"} />
-            <Image className={classes.logo} mb={32} />
+            <div className={classes.logo}  >
+                <img src={"./frame.svg"} alt={"logo"} /></div>
+            {/* <Image className={classes.logo} mb={32} /> */}
             <Title style={{ textAlign: "center" }} mb={32} className={classes.title}>
                 {NOT_FOUND_LABEL}
             </Title>
