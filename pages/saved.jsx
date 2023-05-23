@@ -1,10 +1,10 @@
-import { Container } from "@mantine/core";
+import {Container} from "@mantine/core";
 
 function Projects() {
-  return (
-    <Container size={"xl"} >
-    </Container>
-  );
+    return (
+        <Container size={"xl"}>
+        </Container>
+    );
 }
 
 export default Projects;

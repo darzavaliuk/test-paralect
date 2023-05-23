@@ -7,7 +7,10 @@ import {
     Button,
     Title
 } from "@mantine/core";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
+
+const NOT_FOUND_LABEL = 'Упс, здесь еще ничего нет!';
+const SEARCH_VACANCIES = 'Поиск Вакансий';
 
 const useStyles = createStyles(() => ({
     footer: {
@@ -93,33 +96,36 @@ const useStyles = createStyles(() => ({
         background: "#DEECFF",
         borderRadius: "8px",
         fontFamily: "Open Sans",
-fontWeight: "600",
-fontSize: "14px",
-lineHeight: "155%",
-/* identical to box height, or 22px */
+        fontWeight: "600",
+        fontSize: "14px",
+        lineHeight: "155%",
+        /* identical to box height, or 22px */
 
 
-/* Blue 600 */
+        /* Blue 600 */
 
-color: "#3B7CD3",
-"&:hover": {
-    background: "#92C1FF",
-    cursor: "pointer",
-},
-"&:active": {
-    background: "#3B7CD3",
-    cursor: "pointer",
-}
-}
+        color: "#3B7CD3",
+        "&:hover": {
+            background: "#92C1FF",
+            cursor: "pointer",
+        },
+        "&:active": {
+            background: "#3B7CD3",
+            cursor: "pointer",
+        }
+    }
 }));
 
 const NoContent = () => {
-    const { classes } = useStyles();
+    const {classes} = useStyles();
     const router = useRouter();
     return (
         <Container>
-            <Image src={"../Frame.svg"} className={classes.logo} mb={32} />
-            <Title style={{ textAlign: "center" }} mb={32} className={classes.title}>Упс, здесь еще ничего нет!</Title> <Group position="center">
+            <Image src={"../Frame.svg"} className={classes.logo} mb={32}/>
+            <Title style={{textAlign: "center"}} mb={32} className={classes.title}>
+                {NOT_FOUND_LABEL}
+            </Title>
+            <Group position="center">
                 <Button
                     mt={32}
                     size="md"
@@ -128,7 +134,7 @@ const NoContent = () => {
                         router.push("/");
                     }}
                 >
-                    Поиск Вакансий
+                    {SEARCH_VACANCIES}
                 </Button>
             </Group>
         </Container>

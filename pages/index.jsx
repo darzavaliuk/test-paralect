@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import {useEffect} from "react";
+import {useRouter} from "next/router";
 
 function About() {
-  const router = useRouter();
-  useEffect(() => {
-    router.push("vacancies");
-  });
+    const router = useRouter();
+    useEffect(() => {
+        router.push("vacancies");
+    });
 
-  return <></>;
+    return <></>;
 }
 
 export default About;

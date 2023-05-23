@@ -4,7 +4,13 @@ import {
     Card,
     SimpleGrid,
 } from "@mantine/core";
-import { useState } from "react";
+import {useState} from "react";
+
+const SALARY = 'з/п';
+const MINUS = '-';
+const FROM = 'от';
+const DOT = '•';
+
 
 const useStyles = createStyles((theme) => ({
     title: {
@@ -31,7 +37,7 @@ const useStyles = createStyles((theme) => ({
 
     card: {
         border: `1px solid ${theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]
-            }`,
+        }`,
     },
 
     cardTitle: {
@@ -75,10 +81,10 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-function FavoriteProductItem({ data }) {
+function FavoriteProductItem({data}) {
 
     const [selectedCard, setSelectedCard] = useState(null);
-    const { classes, theme } = useStyles();
+    const {classes} = useStyles();
 
     function getSvgUrl(index) {
         if (index === selectedCard) {
@@ -89,7 +95,7 @@ function FavoriteProductItem({ data }) {
         }
     }
 
-    function handleClickFavorite(feature, e) {
+    function handleClickFavorite(feature) {
         setSelectedCard(feature.id);
 
         // localStorage.clear()
@@ -99,20 +105,26 @@ function FavoriteProductItem({ data }) {
         let update;
         if (favoriteProducts) {
             console.log("kdsjf")
-            update = favoriteProducts.filter(p => p.id != feature.id);
+            update = favoriteProducts.filter(p => p.id !== feature.id);
         } else {
             update = []
         }
         let data
-        if (favoriteProducts.length == update.length)
-            data = [...update, { profession: feature.profession, id: feature.id, payment_from: feature.payment_from, payment_to: feature.payment_to, type_of_work: feature["type_of_work"]["title"], town: feature["town"]["title"] }];
+        if (favoriteProducts.length === update.length)
+            data = [...update, {
+                profession: feature.profession,
+                id: feature.id,
+                payment_from: feature.payment_from,
+                payment_to: feature.payment_to,
+                type_of_work: feature["type_of_work"]["title"],
+                town: feature["town"]["title"]
+            }];
         else
             data = update
-        console.log(data)
         // let data = data.filter(p => p.id !== feature.id);
         localStorage.setItem('favoriteProducts', JSON.stringify(data))
-        let favoriteProduc = JSON.parse(localStorage.getItem('favoriteProducts'));
-        console.log(favoriteProduc)
+        let favoriteProduct = JSON.parse(localStorage.getItem('favoriteProducts'));
+        console.log(favoriteProduct)
     }
 
 
@@ -124,7 +136,7 @@ function FavoriteProductItem({ data }) {
                 // w={773}
                 // spacing="xl"
                 // mt={50}
-                breakpoints={[{ maxWidth: "md", cols: 1 }]}
+                breakpoints={[{maxWidth: "md", cols: 1}]}
             >
 
                 <Card
@@ -136,41 +148,50 @@ function FavoriteProductItem({ data }) {
                         borderRadius: "12px"
                     }}
 
-                // onClick={handleClick}
+                    // onClick={handleClick}
                 >
 
                     {/* <feature.icon size={50} stroke={2} color={theme.fn.primaryColor()} /> */}
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <Text className={classes.cardTitle}  >
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <Text className={classes.cardTitle}>
                             {data["profession"]}
                         </Text>
-                        <svg width="20" height="20" viewBox="0 0 20 20" >
-                            <image href={getSvgUrl(data.id)} width="20" height="20" onClick={(e) => handleClickFavorite(data, e)} />
+                        <svg width="20" height="20" viewBox="0 0 20 20">
+                            <image href={getSvgUrl(data.id)} width="20" height="20"
+                                   onClick={(e) => handleClickFavorite(data, e)}/>
                         </svg>
                         {/* <img src="/star.svg" alt="My SVG" /> */}
                         {/* <Rating defaultValue={2} color="blue" count={1}  onClick={(e) => handleClickFavorite(feature, e) /> */}
                     </div>
-                    <div style={{ display: "flex", marginTop: "12.5px" }}>
-                        {(data["payment_from"] != 0 || data["payment_to"] != 0) ?
-                            (<><Text className={classes.money} >
-                                {(data["payment_from"] != 0 && data["payment_to"] != 0) ? (<div style={{ display: "flex" }}><Text className={classes.money} style={{ marginRight: "4px" }}>з/п {data["payment_from"]}</Text><Text className={classes.money} >-  {data["payment_to"]}</Text></div>) : (<></>)}
+                    <div style={{display: "flex", marginTop: "12.5px"}}>
+                        {(data["payment_from"] !== 0 || data["payment_to"] !== 0) ?
+                            (<><Text className={classes.money}>
+                                {(data["payment_from"] !== 0 && data["payment_to"] !== 0) ? (
+                                    <div style={{display: "flex"}}><Text className={classes.money}
+                                                                         style={{marginRight: "4px"}}>{SALARY} {data["payment_from"]}</Text><Text
+                                        className={classes.money}>{MINUS} {data["payment_to"]}</Text></div>) : (<></>)}
                             </Text>
 
-                                {(data["payment_from"] != 0 && data["payment_to"] == 0) ? (<div><Text className={classes.money} >з/п от {data["payment_from"]}</Text></div>) : (<></>)}
-                                {(data["payment_from"] == 0 && data["payment_to"] != 0) ? (<div><Text className={classes.money} style={{ marginRight: "4px" }}>з/п {data["payment_to"]}</Text></div>) : (<></>)}
+                                {(data["payment_from"] !== 0 && data["payment_to"] === 0) ? (
+                                    <div><Text className={classes.money}>{SALARY} {FROM} {data["payment_from"]}</Text>
+                                    </div>) : (<></>)}
+                                {(data["payment_from"] === 0 && data["payment_to"] !== 0) ? (
+                                    <div><Text className={classes.money}
+                                               style={{marginRight: "4px"}}>{SALARY} {data["payment_to"]}</Text>
+                                    </div>) : (<></>)}
 
-                                <Text className={classes.money} style={{ marginLeft: "2px" }}>
+                                <Text className={classes.money} style={{marginLeft: "2px"}}>
                                     {data["currency"]}
-                                </Text><Text style={{ marginRight: "12px", marginLeft: "12px" }}>•</Text></>) : (<></>)}
-                        <Text className={classes.workingHours} >
+                                </Text><Text style={{marginRight: "12px", marginLeft: "12px"}}>{DOT}</Text></>) : (<></>)}
+                        <Text className={classes.workingHours}>
                             {data["type_of_work"]}
                         </Text>
                     </div>
 
                     {/* <Rating defaultValue={2} color="blue" count={1} onClick={handleClickFavorite} /> */}
-                    <div style={{ display: "flex", marginTop: "13px" }}>
-                        <img src={"../location.svg"} />
-                        <Text style={{ marginLeft: "11px" }} className={classes.money} >
+                    <div style={{display: "flex", marginTop: "13px"}}>
+                        <img src={"../location.svg"} alt={'location'}/>
+                        <Text style={{marginLeft: "11px"}} className={classes.money}>
                             {data["town"]}
                         </Text>
                     </div>

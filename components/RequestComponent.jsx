@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-    createStyles,
     SimpleGrid,
     Container
 } from "@mantine/core";
@@ -11,6 +10,9 @@ import CardVacancy from './CardVacancy';
 import Loader from './Loader';
 import NoContent from "./NoContent";
 
+
+const ARROW_LEFT = '<';
+const ARROW_RIGHT = '>';
 
 function RequestComponent({ parameter }) {
     let [currentPage, setCurrentPage] = useState(1);
@@ -40,21 +42,24 @@ function RequestComponent({ parameter }) {
         if (parameter) {
             // handlePageChange(0)
             req = "https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?published=1&count=4&" + `page=${currentPage.selected}&` + "keyword=" + ((change) ? (change) : ("")) + "&catalogues=" + ((parameter.category !== -1) ? (parameter.category) : ("")) + "&payment_from=" + ((parameter.valueFrom) ? (parameter.valueFrom) : ("")) + "&payment_to=" + ((parameter.valueTo) ? (parameter.valueTo) : ("")) + "/";
-         } else
+        } else
             req = "https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?published=1&count=4&" + `page=${currentPage.selected}&` + "keyword=" + ((change) ? (change) : (""));
         // console.log((change) ? (change) : ("") + "&catalogues="+ (parameter.category) ? (parameter.category) : ("") + "&payment_from=" +  (parameter.valueFrom) ? (parameter.valueFrom) : ("") +"&payment_to=" +  (parameter.valueTo) ? (parameter.valueTo) : ("") + "/")
-        console.log(req)
 
         fetch(req, { headers, })
             .then((response) => response.json())
-            .then((data) => { setData(data); setTotalPages(Math.ceil(data["total"] / 4)); data["objects"].map(el => console.log(el["profession"])); console.log(data.total); setIsLoading(false);  })
+            .then((data) => {
+                setData(data);
+                setTotalPages(Math.ceil(data["total"] / 4));
+                setIsLoading(false);
+            })
             .catch((error) => console.error(error));
 
     }, [change, parameter, currentPage.selected]);
 
 
     return (
-        <Container size="lg" padding={0} >
+        <Container size="lg" padding={0}>
             <SearchPanel onSearch={handleSearch} />
             {(data && !isLoading && data.total) ? (
                 <div>
@@ -72,21 +77,21 @@ function RequestComponent({ parameter }) {
                     </SimpleGrid>
 
                 </div>
-            ) : 
+            ) :
 
-                (isLoading) ? (<Loader isLoading={isLoading}/>)  : (<NoContent /> ) 
+                (isLoading) ? (<Loader isLoading={isLoading} />) : (<NoContent />)
 
 
             }
             <ReactPaginate
                 pageCount={(isLoading) ? 0 : totalPages}
-                pageRangeDisplayed={(currentPage.selected == 1) ? 2 : 3}
+                pageRangeDisplayed={(currentPage.selected === 1) ? 2 : 3}
                 marginPagesDisplayed={0}
                 onPageChange={handlePageChange}
                 containerClassName={(isLoading || !data || !data.total) ? "hidden" : "pagination"}
                 activeClassName={"active"}
-                previousLabel={"<"}
-                nextLabel={">"}
+                previousLabel={ARROW_LEFT}
+                nextLabel={ARROW_RIGHT}
                 // forcePage={currentPage.selected}
                 disableLastPage={true}
                 onPageActive={page => currentPage = page.selected}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import StarIcon from './StarIcon';
 
 function Star(props) {
@@ -12,8 +12,7 @@ function Star(props) {
 
     const handleClick = () => {
         const id = props.id;
-        const onStarClick  = props.onStarClick; 
-        const isStarred = props.isStarred;
+        const onStarClick = props.onStarClick;
         onStarClick();
         if (filled) {
             localStorage.removeItem(id);
@@ -30,7 +29,7 @@ function Star(props) {
             onClick={handleClick}
             data-elem={`vacancy-${props.id}-shortlist-button`}
         >
-            <StarIcon filled={filled} />
+            <StarIcon filled={filled}/>
         </div>
     );
 }
