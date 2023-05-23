@@ -8,7 +8,7 @@ import {
     Title
 } from "@mantine/core";
 import {useRouter} from "next/router";
-import NotFoundImg from "../public/frame_1.svg"
+import NotFoundImg from "./../public/frame_1.svg"
 
 const NOT_FOUND_LABEL = 'Упс, здесь еще ничего нет!';
 const SEARCH_VACANCIES = 'Поиск Вакансий';
