@@ -188,7 +188,7 @@ function FilterPanel({ onParameterChange }) {
     useEffect(() => {
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer v3.r.137440105.a077cda7bfea7618cc08cc357d86d8d77d1c5f2e.c094dc2135eaa978b177f9543a72a5ac0cbfcb57',
+            'Authorization': 'Bearer v3.r.137440105.0efbadb77e441ec96576a594ac15b2c72bbfca35.9bcf938ada175efb487f7b8227b235f3aaf5a648',
             'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
             'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
         };
